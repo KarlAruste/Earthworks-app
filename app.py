@@ -1,51 +1,128 @@
 import streamlit as st
 
-st.set_page_config(page_title="Earthworks App", layout="wide")
+st.set_page_config(
+    page_title="Earthworks App",
+    layout="wide"
+)
 
-# --- Sidebar menu ---
-st.sidebar.title("Earthworks App")
+# ----------- GLOBAL DARK THEME CSS -----------
+st.markdown("""
+<style>
+
+/* App background */
+.stApp {
+    background-color: #0f1117;
+    color: #e5e7eb;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #141821;
+    border-right: 1px solid #1f2937;
+}
+
+/* Sidebar text */
+section[data-testid="stSidebar"] * {
+    color: #e5e7eb;
+}
+
+/* Remove radio circle */
+div[role="radiogroup"] > label > div:first-child {
+    display: none;
+}
+
+/* Sidebar menu items */
+div[role="radiogroup"] label {
+    background-color: transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    cursor: pointer;
+}
+
+div[role="radiogroup"] label:hover {
+    background-color: #1b1f2a;
+}
+
+/* Active item (Streamlit hack – first checked) */
+div[role="radiogroup"] label:has(input:checked) {
+    background-color: #ff8a00;
+    color: #000;
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #f9fafb;
+}
+
+/* Info box */
+div[data-testid="stAlert"] {
+    background-color: #1b1f2a;
+    border: 1px solid #ff8a00;
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: #ff8a00;
+    color: #000;
+    border-radius: 8px;
+    border: none;
+    padding: 8px 16px;
+}
+
+.stButton>button:hover {
+    background-color: #ffa733;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ----------- SIDEBAR -----------
+st.sidebar.markdown("## 🏗 Earthworks")
+st.sidebar.caption("Kaevetööde kalkulaator")
+st.sidebar.divider()
+
 page = st.sidebar.radio(
-    "Menüü",
-    ["Avaleht", "Mahukalkulaator", "Masinad", "Seaded"],
-    index=0
+    "",
+    [
+        "📁 Projects",
+        "📐 Volumes",
+        "🚜 Machines",
+        "👷‍♂️ Workers",
+        "📊 Reports",
+        "⚙️ Settings"
+    ]
 )
 
 st.sidebar.divider()
-st.sidebar.caption("Versioon: 0.1 (arenduses)")
+st.sidebar.caption("v0.1 • arenduses")
 
-# --- Pages ---
-if page == "Avaleht":
-    st.title("Earthworks App")
-    st.subheader("Kaevetööde ja masinate kalkulatsioonid")
+# ----------- PAGES -----------
+if page == "📁 Projects":
+    st.title("Projects")
+    st.write("Projektide loetelu ja haldus.")
+    st.info("Siia tulevad projektid ja objektid.")
 
-    st.markdown("""
-Tere tulemast!
+elif page == "📐 Volumes":
+    st.title("Volumes")
+    st.write("Kaevemahtude arvutused (Excel / LandXML).")
+    st.warning("Lisame järgmise sammuna.")
 
-See veebirakendus on mõeldud:
-- kaevetööde mahtude arvutamiseks
-- masinate tootlikkuse ja hindade võrdlemiseks
-- erinevate tööstsenaariumite analüüsiks
+elif page == "🚜 Machines":
+    st.title("Machines")
+    st.write("Masinate tunnihinnad ja tootlikkused.")
+    st.warning("Lisame järgmise sammuna.")
 
-🚧 Rakendus on arenduses. Siia lisanduvad peagi:
-- projektide üleslaadimine
-- LandXML mahuarvutused
-- masinate hinnakirjad
-- aruannete eksport
-""")
+elif page == "👷‍♂️ Workers":
+    st.title("Workers")
+    st.write("Tööjõu planeerimine.")
+    st.warning("Lisame järgmise sammuna.")
+    
+elif page == "📊 Reports":
+    st.title("Reports")
+    st.write("Aruanded ja ekspordid (Excel / PDF).")
+    st.warning("Lisame järgmise sammuna.")
 
-    st.info("Vali vasakult menüüst järgmine moodul.")
-
-elif page == "Mahukalkulaator":
-    st.title("Mahukalkulaator")
-    st.write("Siia tuleb mahu ja aja/hinna kalkulaator (Excel/CSV/LandXML upload).")
-    st.warning("Placeholder – lisame funktsiooni järgmisena.")
-
-elif page == "Masinad":
-    st.title("Masinad")
-    st.write("Siia tuleb masinate nimekiri, tunnihinnad, tootlikkused ja koefitsiendid.")
-    st.warning("Placeholder – lisame funktsiooni järgmisena.")
-
-elif page == "Seaded":
-    st.title("Seaded")
-    st.write("Siia saab hiljem panna ühikud, vaikimisi koefitsiendid, tööpäeva pikkuse jne.")
-    st.warning("Placeholder – lisame funktsiooni järgmisena.")
+elif page == "⚙️ Settings":
+    st.title("Settings")
+    st.write("Rakenduse seaded ja vaikimisi koefitsiendid.")
